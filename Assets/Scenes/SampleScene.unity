@@ -3110,8 +3110,11 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 0
-  targetRange: 2.5
+  bulletPrefab: {fileID: 0}
+  firingPoint: {fileID: 0}
+  turretRange: 2.5
   rotateSpeed: 100
+  bps: 1
 --- !u!1 &1572215584
 GameObject:
   m_ObjectHideFlags: 0
