@@ -21,9 +21,12 @@ public class LevelManager : MonoBehaviour
         money += amount;
     }
     
+    public void SpendMoney(int amount){
+        money -= amount;
+    }
+
     public bool CanBuy(int amount){
         if(amount  <= money){
-            money -= amount;
             return true;        
         }else{
             return false;

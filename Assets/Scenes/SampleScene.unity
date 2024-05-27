@@ -173,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2200772903604776329, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
       propertyPath: hoverColor.a
-      value: 0.18431373
+      value: 0.25490198
       objectReference: {fileID: 0}
     - target: {fileID: 2200772903604776329, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
       propertyPath: hoverColor.b
@@ -191,21 +191,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlot (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2564758724220180106, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4890137602345292490, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4890137602345292490, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4890137602345292490, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4890137602345292490, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890137602345292490, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890137602345292490, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1666576215
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -582,7 +594,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.604937
+  orthographic size: 4.3727446
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4145,9 +4157,15 @@ MonoBehaviour:
     m_Bits: 0
   bulletPrefab: {fileID: 0}
   firingPoint: {fileID: 0}
+  upgradeUI: {fileID: 0}
+  upgradeButton: {fileID: 0}
+  turretSpriteRenderer: {fileID: 0}
+  level2Sprite: {fileID: 0}
+  level3Sprite: {fileID: 0}
   turretRange: 2.5
   rotateSpeed: 100
   bps: 1
+  upgradeCost: 100
 --- !u!4 &1431015254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 314294698158327695, guid: ff2432d09f932714081e452a4a739eb2, type: 3}
@@ -4774,6 +4792,7 @@ GameObject:
   - component: {fileID: 2009258731}
   - component: {fileID: 2009258733}
   - component: {fileID: 2009258734}
+  - component: {fileID: 2009258735}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -4853,6 +4872,18 @@ MonoBehaviour:
   - name: Test Turret
     cost: 150
     prefab: {fileID: 7474110154935690335, guid: 5ef7f9182f2cdfe4da882c25e914672f, type: 3}
+--- !u!114 &2009258735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009258730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85f28cedb45aa64f86387975f75fe9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2030404016
 PrefabInstance:
   m_ObjectHideFlags: 0

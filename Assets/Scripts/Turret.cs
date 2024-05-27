@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class Turret : MonoBehaviour
 {
@@ -11,16 +13,44 @@ public class Turret : MonoBehaviour
     [SerializeField] private LayerMask enemyMask; //enemy layer
     [SerializeField] private GameObject bulletPrefab; //ref to bullets
     [SerializeField] private Transform firingPoint; //ref to barrel
+    [SerializeField] private GameObject upgradeUI;
+    [SerializeField] private Button upgradeButton;
+    [SerializeField] private SpriteRenderer turretSpriteRenderer;
+    [SerializeField] private Sprite level2Sprite;
+    [SerializeField] private Sprite level3Sprite;
 
     [Header("Attribute")]
     [SerializeField] private float turretRange = 2.5f; // range of turret
     [SerializeField] private float rotateSpeed = 100f; //rotation speed of turret
     [SerializeField] private float bps = 1f; //bullets per second 
+    [SerializeField] private int upgradeCost = 5;
 
     //transform variable to hold current target;
     private Transform target;
-     private float timeUntilFire;
+    private float timeUntilFire;
+    private int level = 1;
 
+    // private void Start(){
+    //     upgradeButton.onClick.AddListener(Upgrade);
+    // }
+    private void Update(){
+        if (target == null){
+            FindTarget();
+            return;
+        }
+
+        RotateToTarget();
+
+        if(!CheckTargetInRange()){
+            target = null;
+        }else{
+            timeUntilFire += Time.deltaTime;
+            if (timeUntilFire >= 1f / bps){
+                Fire();
+                timeUntilFire = 0f;
+            }
+        }
+    }
     //method to find a target
     private void FindTarget(){
         //detecting all enemy objects in the range
@@ -55,34 +85,48 @@ public class Turret : MonoBehaviour
         Handles.DrawWireDisc(transform.position, transform.forward, turretRange);
     }
 
+    //Fire method that handles bullet firing
     private void Fire(){
+        //bullet obj instantiated on firing position
         GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
+        //bullet script used to target the enemy
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
     }
 
-    // Start is called before the first frame update
-    void Start(){
-        
+    public void OpenUpgradeUI(){
+        upgradeUI.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update(){
-        if (target == null){
-            FindTarget();
+    public void CloseUpgradeUI(){
+        upgradeUI.SetActive(false);
+        UIManager.main.SetHoveringState(false);
+    }
+
+    public void Upgrade(){
+        if(upgradeCost > LevelManager.main.money) {
+            Debug.Log("NO MONEY");
             return;
         }
 
-        RotateToTarget();
+        if(level == 1){
+            LevelManager.main.SpendMoney(upgradeCost * level);
+            level++;
+            bps *= 1.5f;
+            turretRange *= 1.2f;
+             turretSpriteRenderer.sprite = level2Sprite;
 
-        if(!CheckTargetInRange()){
-            target = null;
+        }else if(level == 2){
+            LevelManager.main.SpendMoney(upgradeCost * level);
+            level++;
+            bps *= 2f;
+            turretRange *= 1.5f;
+             turretSpriteRenderer.sprite = level3Sprite; // Upgrade sprite to level 3
+
         }else{
-            timeUntilFire += Time.deltaTime;
-            if (timeUntilFire >= 1f / bps){
-                Fire();
-                timeUntilFire = 0f;
-            }
+            Debug.Log("MAX LEVEL");
         }
+        CloseUpgradeUI();
     }
+    
 }
