@@ -630,7 +630,7 @@ MonoBehaviour:
   firingPoint: {fileID: 1680659047114210179}
   upgradeUI: {fileID: 8509360406160181814}
   upgradeButton: {fileID: 1493770510249242332}
-  turretSpriteRenderer: {fileID: 0}
+  turretSpriteRenderer: {fileID: 2967838800231755527}
   level2Sprite: {fileID: 21300000, guid: dd15c24cc4ee0364f8807d95e1441b88, type: 3}
   level3Sprite: {fileID: 21300000, guid: ef2e2885805ef96418f09148eb739fc6, type: 3}
   turretRange: 6

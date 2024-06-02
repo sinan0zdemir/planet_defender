@@ -80,10 +80,10 @@ public class Turret : MonoBehaviour
     }
 
     //draws a range disc around turret
-    private void OnDrawGizmosSelected(){
-        Handles.color = Color.green;
-        Handles.DrawWireDisc(transform.position, transform.forward, turretRange);
-    }
+    // private void OnDrawGizmosSelected(){
+    //     Handles.color = Color.green;
+    //     Handles.DrawWireDisc(transform.position, transform.forward, turretRange);
+    // }
 
     //Fire method that handles bullet firing
     private void Fire(){
