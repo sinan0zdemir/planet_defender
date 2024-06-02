@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene(1); // sample scene index to open the sample scene 
+        SceneManager.LoadScene("SampleScene"); // sample scene index to open the sample scene 
     }
 
     public void QuitGame()

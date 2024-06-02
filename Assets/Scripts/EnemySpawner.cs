@@ -24,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
     private bool isSpawning = false;
+    private GameController gameController;
 
     void Awake()
     {
@@ -34,8 +35,8 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameController = FindObjectOfType<GameController>(); // Find the GameController instance in the scene
         StartCoroutine(StartWave());
-
     }
 
     // Update is called once per frame
@@ -72,6 +73,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void EnemyKilled(){
         enemiesAlive--;
+        gameController.AddScore(10); // Adding 10 points for each enemy killed
     }
 
     private void EndWave(){

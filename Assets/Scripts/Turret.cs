@@ -112,15 +112,15 @@ public class Turret : MonoBehaviour
         if(level == 1){
             LevelManager.main.SpendMoney(upgradeCost * level);
             level++;
-            bps *= 1.5f;
+            bps *= 1.2f;
             turretRange *= 1.2f;
              turretSpriteRenderer.sprite = level2Sprite;
 
         }else if(level == 2){
             LevelManager.main.SpendMoney(upgradeCost * level);
             level++;
-            bps *= 2f;
-            turretRange *= 1.5f;
+            bps *= 1.2f;
+            turretRange *= 1.2f;
              turretSpriteRenderer.sprite = level3Sprite; // Upgrade sprite to level 3
 
         }else{

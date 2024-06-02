@@ -7,8 +7,22 @@ public class GameController : MonoBehaviour
     public int enemyPasses = 0;  // Geçen düşman sayısı
 
     public int winningScore = 50000;
-    public int losingEnemyPasses = 20;
+    public int losingEnemyPasses = 2;
+    
+    public static GameController main;
 
+    void Awake()
+    {
+        // Singleton pattern
+        if (main == null)
+        {
+            main = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Update()
     {
         CheckGameOver();
@@ -40,11 +54,11 @@ public class GameController : MonoBehaviour
 
     void WinGame()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("Win");
     }
 
     void LoseGame()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Lose");
     }
 }
