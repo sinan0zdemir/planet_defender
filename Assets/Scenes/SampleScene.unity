@@ -5100,11 +5100,7 @@ RectTransform:
   - {fileID: 545736274}
   - {fileID: 448078662}
   - {fileID: 421378686}
-<<<<<<< HEAD
-  - {fileID: 832383638}
-=======
   - {fileID: 1721803151}
->>>>>>> ab31b642a104f82b64f17e7012c504d2647c98e2
   m_Father: {fileID: 1996070464}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
