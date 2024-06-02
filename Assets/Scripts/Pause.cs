@@ -15,11 +15,11 @@ public class Pause : MonoBehaviour
 
         if (isPaused)
         {
-            Time.timeScale = 0f; // Oyunu durdur
+            Time.timeScale = 0f; // stop the game
         }
         else
         {
-            Time.timeScale = 1f; // Oyunu devam ettir
+            Time.timeScale = 1f; // resume game 
         }
     }
 }
