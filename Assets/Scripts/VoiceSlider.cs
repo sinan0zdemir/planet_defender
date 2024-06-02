@@ -1,20 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderVolumeControl : MonoBehaviour
+public class VolumeController : MonoBehaviour
 {
-    public AudioSource musicSource; // Audio source
-    public Slider volumeSlider; // Volume slider
+    public Slider volumeSlider;
+    public AudioSource audioSource;
 
     void Start()
     {
-        // Set the initial value of the slider to match the current volume
-        volumeSlider.value = musicSource.volume;
+        // Set the slider's initial value to the audio source's volume
+        volumeSlider.value = audioSource.volume;
+
+        // Add a listener to the slider to call the ChangeVolume function when the value changes
+        volumeSlider.onValueChanged.AddListener(ChangeVolume);
     }
 
-    public void SetVolume()
+    // This function is called when the slider value changes
+    void ChangeVolume(float volume)
     {
-        // Update the volume of the music source based on the slider's value
-        musicSource.volume = volumeSlider.value;
+        audioSource.volume = volume;
     }
 }

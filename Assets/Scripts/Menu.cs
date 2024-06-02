@@ -7,6 +7,8 @@ public class Menu : MonoBehaviour
 {
   [Header("References")]
   [SerializeField] TextMeshProUGUI moneyUI;
+  [SerializeField] TextMeshProUGUI HPLeft;
+  [SerializeField] TextMeshProUGUI Score;
   [SerializeField] Animator anim;
 
   private bool isMenuOpen = true;
@@ -18,7 +20,8 @@ public class Menu : MonoBehaviour
 
   private void OnGUI(){
       moneyUI.text = LevelManager.main.money.ToString();
-
+      HPLeft.text = (GameController.main.losingEnemyPasses - GameController.main.enemyPasses).ToString();
+      Score.text = GameController.main.playerScore.ToString();
   }
 
 }
