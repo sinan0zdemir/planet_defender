@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     public int enemyPasses = 0;  // Geçen düşman sayısı
 
     public int winningScore = 50000;
-    public int losingEnemyPasses = 2;
+    public int losingEnemyPasses = 15;
     
     public static GameController main;
 
