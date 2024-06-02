@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
 #if UNITY_EDITOR
-        // Unity Editor'da Quit çalışmaz, bu yüzden editörde durdurmak için ek bir kod ekliyoruz.
+         // Quit does not work in the Unity Editor, so we need additional code to stop play mode in the editor.
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
     }
