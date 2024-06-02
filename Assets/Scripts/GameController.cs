@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
     public int playerScore = 0;
     public int enemyPasses = 0;  // Number of enemies that have passed
 
-    public int winningScore = 50000;
+    public int winningScore = 2500;
     public int losingEnemyPasses = 15;
     
     public static GameController main;
