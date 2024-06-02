@@ -1,50 +1,100 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
 
-public class GameController : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
-    public int playerScore = 0;
-    public int enemyPasses = 0;  // Geçen düşman sayısı
+    [Header("References")]
+    [SerializeField] private GameObject[] enemyPrefabs;
 
-    public int winningScore = 50000;
-    public int losingEnemyPasses = 10;
+    [Header("Attributes")]
+    [SerializeField] private int baseEnemies = 8;
+    [SerializeField] private float enemiesPerSecond = 0.5f;
+    [SerializeField] private float waveDelay = 5f;
+    [SerializeField] private float difficultyScale = 0.75f;
+
+    [Header("Events")]
+    public static UnityEvent onEnemyKilled = new UnityEvent();
+
+    private int currentWave = 1;
+    private float timeSinceLastSpawn;
+    private int enemiesAlive;
+    private int enemiesLeftToSpawn;
+    private bool isSpawning = false;
+
+    private GameController gameController;
+
+    // Singleton instance
+    public static EnemySpawner instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        onEnemyKilled.AddListener(EnemyKilled);
+    }
+
+    void Start()
+    {
+        gameController = FindObjectOfType<GameController>(); // Find the GameController instance in the scene
+        StartCoroutine(StartWave());
+    }
 
     void Update()
     {
-        CheckGameOver();
-    }
+        if (!isSpawning) return;
+        timeSinceLastSpawn += Time.deltaTime;
 
-    public void AddScore(int points)
-    {
-        playerScore += points;
-        Debug.Log("Score: " + playerScore);  // Skorun arttığını konsolda görmek için
-    }
-
-    public void EnemyPassed()
-    {
-        enemyPasses++;
-        Debug.Log("Enemies Passed: " + enemyPasses);  // Geçen düşman sayısını konsolda görmek için
-    }
-
-    void CheckGameOver()
-    {
-        if (playerScore >= winningScore)
+        if (timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0)
         {
-            WinGame();
+            SpawnEnemy();
+            enemiesLeftToSpawn--;
+            enemiesAlive++;
+            timeSinceLastSpawn = 0f;
         }
-        else if (enemyPasses >= losingEnemyPasses)
+
+        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0)
         {
-            LoseGame();
+            EndWave();
         }
     }
 
-    void WinGame()
+    private int EnemiesPerWave()
     {
-        SceneManager.LoadScene(3);
+        return Mathf.RoundToInt(baseEnemies * Mathf.Pow(currentWave, difficultyScale));
     }
 
-    void LoseGame()
+    private IEnumerator StartWave()
     {
-        SceneManager.LoadScene(2);
+        yield return new WaitForSeconds(waveDelay);
+        isSpawning = true;
+        enemiesLeftToSpawn = EnemiesPerWave();
+    }
+
+    private void SpawnEnemy()
+    {
+        GameObject enemyToSpawn = enemyPrefabs[0];
+        Instantiate(enemyToSpawn, LevelManager.main.startPoint.position, Quaternion.identity);
+    }
+
+    public void EnemyKilled()
+    {
+        enemiesAlive--;
+        gameController.AddScore(10); // Adding 10 points for each enemy killed
+    }
+
+    private void EndWave()
+    {
+        isSpawning = false;
+        timeSinceLastSpawn = 0f;
+        currentWave++;
+        StartCoroutine(StartWave());
     }
 }
