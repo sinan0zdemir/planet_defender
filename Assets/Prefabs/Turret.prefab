@@ -751,5 +751,5 @@ MonoBehaviour:
   level3Sprite: {fileID: 21300000, guid: 0a6834c77daef054daeefa45e513288b, type: 3}
   turretRange: 4
   rotateSpeed: 300
-  bps: 3
+  bps: 2.5
   upgradeCost: 100
